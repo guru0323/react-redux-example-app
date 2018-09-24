@@ -1,6 +1,7 @@
 'use strict';
 
 export default (state = {}, action) => {
+  if (!action.payload) return state;
   switch (action.type) {
     case 'HOME_PAGE_LOADED':
       return {
@@ -15,7 +16,7 @@ export default (state = {}, action) => {
     case 'CHANGE_TAB':
       return {
         ...state,
-        articles: action.payload.articles,
+        articles: action.payload.articles || [],
         articlesCount: action.payload.articlesCount,
         tab: action.tab,
         tag: null,
@@ -24,14 +25,14 @@ export default (state = {}, action) => {
     case 'SET_PAGE':
       return {
         ...state,
-        articles: action.payload.articles,
+        articles: action.payload.articles || [],
         articlesCount: action.payload.articlesCount,
         currentPage: action.page
       };
     case 'APPLY_TAG_FILTER':
       return {
         ...state,
-        articles: action.payload.articles,
+        articles: action.payload.articles || [],
         articlesCount: action.payload.articlesCount,
         tab: null,
         tag: action.tag,
